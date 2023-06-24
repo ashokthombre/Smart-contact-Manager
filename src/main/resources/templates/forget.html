@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section class="banner d-flex justify-content-center align-items-center ">
+  
+   
+       <div class="card mx-5">
+         <div class="card-body">
+           <!-- this is message box -->
+        <div th:if="${session.message}" class="container text-center">
+          
+    <div th:classappend="${'alert-'+session.message.type}" class="alert " role="alert">
+        <span th:text="${session.message.content}"></span>
+       </div>
+       </div>
+           
+           <h3 class="text-center">Forget Password</h3>
+           
+           <form th:action="@{/change-password}" method="post">
+             
+             <div class="form-group">
+             <label for="userEmail">User Email</label>
+              <input name="userEmail" id="userEmail" type="text" class="form-control" placeholder="Email"/>
+             
+          
+               
+               <div class="container text-center">
+               
+               <button type="submit" class="btn bg-primary mt-2 text-white">Send OTP</button>
+               
+               </div>
+             
+             </div>
+           
+           
+           
+           
+           </form>
+           
+           
+         
+         </div>
+         
+       
+       </div>
+  
+</section>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section>
+ <div class="card mx-3">
+ 
+  <div class="card_body" th:if="${contact}">
+     
+     <div class="container text-center">
+     
+      <img  style="width: 200px; height: 200px;"  class="my_profile_pictute mt-2 mb-2" alt="profilePhoto" th:src="@{'/img/'+${contact.image}}">
+       
+       <h3 class="mt-2"><span  th:text="${contact.name}"></span>(<span th:text="${contact.secondName}"></span>)</h3>
+       
+     <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Work</th>
+      <th scope="col">About</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td th:text="${contact.email}"></td>
+       <td th:text="${contact.phone}"></td>
+       <td th:text="${contact.work}"></td>
+       <td th:utext="${contact.description}"></td>
+    </tr>
+   
+  </tbody>
+</table>
+       
+       <div class="container text-ceter mb-2">
+       
+       <a th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-sm">Delete</a>
+      <a  th:href="@{'/user/update-form/'+${contact.cId}}" class="btn bg-primary text-white btn-sm">Update</a>
+       </div>
+     
+     </div>
+     
+  </div>
+  
+  <h1 th:unless=${contact} class="text-center">You don't have permission.</h1>
+ 
+ </div>
+ 
+ 
+</section>
+
+</body>
+</html>

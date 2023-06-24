@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section>
+
+  <div class="card mx-3">
+    <h1 class="text-center">Profile Details</h1>
+  <div class="card_body " >
+     
+     <div class="container text-center">
+     
+      <img  style="width: 200px; height: 200px;"  class="my_profile_pictute mt-2 mb-2" alt="profilePhoto" th:src="@{'/img/'+${user.imageurl}}">
+       
+       <h3 class="mt-2"><span  th:text="${user.name}"></span></h3>
+       <div class="table-responsive"> 
+     <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+  
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><span th:text="${user.id}"></span></th>
+      <td th:text="${user.name}"></td>
+       <td th:text="${user.email}"></td>
+      
+       <td th:utext="${user.role}"></td>
+    </tr>
+   
+  </tbody>
+</table>
+</div>
+       
+      
+     
+     </div>
+     
+     <div class="container text-center">
+       <h1>About</h1>
+         
+     </div>
+     <div class="container text-center">
+      <p th:utext="${user.about}"></p>
+         
+     </div>
+      <div class="container text-center mb-2">
+       
+       <a th:onclick="|deleteProfile()|" class="btn btn-danger btn-sm">Delete</a>
+      <a  th:href="@{/user/updateProfile}"  class="btn bg-primary text-white btn-sm">Update</a>
+      
+       </div>
+     
+  </div>
+  
+ </div>
+ 
+  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <script>
+       
+     function deleteProfile()
+     {
+      
+      swal({
+          title: "Are you sure?",
+          text: "You want to delete Profile?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+             window.location="/user/deleteProfile";
+          } else {
+            swal("Your Contact is not delete.!");
+          }
+        }); 
+      
+     }
+     
+     
+     </script>
+     <script >
+        
+       $(document).ready(()=>
+       {
+        $('.item').removeClass('active');
+        $("#profile-link").addClass("active");
+       })
+       
+       </script>
+     
+  
+</section>
+
+</body>
+</html>
